@@ -173,7 +173,7 @@ namespace Leetcode.leetcode.microsoft.SearchAndSort
                 {
                     return nums[left];
                 }
-                else if(nums[left]>nums[right])
+                else if (nums[left] > nums[right])
                 {
                     var mid = (left + right) >> 1;
                     if (nums[mid] < nums[mid - 1]) return nums[mid];
@@ -220,6 +220,188 @@ namespace Leetcode.leetcode.microsoft.SearchAndSort
                         y--;
                     }
                 }
+            }
+        }
+    }
+
+    namespace p7
+    {
+        public class Solution
+        {
+            public int Search(int[] nums, int target)
+            {
+                if (nums == null || nums.Length < 0) return -1;
+                return Subsearch(nums, 0, nums.Length - 1, target);
+            }
+
+            private int Subsearch(int[] nums, int left, int right, int target)
+            {
+                if (left > right) return -1;
+                if (right - left <= 4)
+                {
+                    for (int i = left; i <= right; i++)
+                    {
+                        if (nums[i] == target) return i;
+                    }
+
+                    return -1;
+                }
+
+                if (nums[left] < nums[right])
+                {
+                    var mid = (left + right) >> 1;
+                    var midVal = nums[mid];
+                    if (midVal == target) return mid;
+                    if (midVal < target) return Subsearch(nums, mid + 1, right, target);
+                    else return Subsearch(nums, left, mid - 1, target);
+                }
+                else
+                {
+                    var mid = (left + right) >> 1;
+                    var midVal = nums[mid];
+                    if (midVal == target) return mid;
+                    if (midVal > nums[left])
+                    {
+                        if (midVal < target) return Subsearch(nums, mid + 1, right, target);
+                        else
+                        {
+                            if (nums[left] <= target)
+                            {
+                                return Subsearch(nums, left, mid - 1, target);
+                            }
+                            else
+                            {
+                                return Subsearch(nums, mid + 1, right, target);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (target < midVal) return Subsearch(nums, left, mid - 1, target);
+                        else if (target <= nums[right]) return Subsearch(nums, mid + 1, right, target);
+                        else return Subsearch(nums, left, mid - 1, target);
+                    }
+                }
+            }
+        }
+    }
+
+    namespace p8
+    {
+        public class Solution
+        {
+            public bool SearchMatrix(int[,] matrix, int target)
+            {
+                var rows = matrix.GetLength(0);
+                var cols = matrix.GetLength(1);
+                var x = 0;
+                var y = cols - 1;
+                while (true)
+                {
+                    if (x < 0 || x == rows || y < 0 || y == cols) return false;
+                    if (matrix[x, y] == target) return true;
+                    else if (matrix[x, y] < target)
+                    {
+                        x++;
+                    }
+                    else
+                    {
+                        y--;
+                    }
+                }
+            }
+        }
+    }
+
+    namespace p9
+    {
+        public class Solution
+        {
+            private const int limit = 10;
+            public double FindMedianSortedArrays(int[] nums1, int[] nums2)
+            {
+                int[] single = null;
+                if (nums1 == null || nums1.Length == 0)
+                {
+                    single = nums2;
+                }
+                else if (nums2 == null || nums2.Length == 0)
+                {
+                    single = nums1;
+                }
+
+                if (single != null)
+                {
+                    var len = single.Length;
+                    if ((len & 1) == 1)
+                    {
+                        return single[len >> 1];
+                    }
+                    else
+                    {
+                        return (single[len >> 1] + single[(len >> 1) - 1]) / 2.0;
+                    }
+                }
+
+                var totalNum = nums1.Length + nums2.Length;
+                if ((totalNum & 1) == 1)
+                {
+                    return FindNth(nums1, 0, nums1.Length, nums2, 0, nums2.Length, totalNum / 2 + 1);
+                }
+                else
+                {
+                    var right = FindNth(nums1, 0, nums1.Length, nums2, 0, nums2.Length, totalNum / 2 + 1);
+                    var left = FindNth(nums1, 0, nums1.Length, nums2, 0, nums2.Length, totalNum / 2);
+                    return (left + right) / 2.0;
+                }
+            }
+
+            private int FindNth(int[] nums1, int l1, int h1, int[] nums2, int l2, int h2,int nth)
+            {
+                var totalNum = h1 - l1 + h2 - l2;
+                if (totalNum <= limit)
+                {
+                    var list = new List<int>(totalNum);
+                    for (int i = l1; i < h1; i++) list.Add(nums1[i]);
+                    for (int i = l2; i < h2; i++) list.Add(nums2[i]);
+                    list.Sort(Comparer<int>.Default);
+                    return list[nth - 1];
+                }
+                if (h1 - l1 < h2 - l2)
+                {
+                    var tmp = nums1;
+                    nums1 = nums2;
+                    nums2 = tmp;
+                    var temp = l1;
+                    l1 = l2;
+                    l2 = temp;
+                    temp = h1;
+                    h1 = h2;
+                    h2 = temp;
+                }
+
+                var mid1 = (l1 + h1) >> 1;
+                var insert = FindInsertionLocation(nums2, l2, h2, nums1[mid1]);
+                var leftNum = mid1 - l1 + insert - l2;
+                var rightNum = totalNum - leftNum;
+                if (leftNum >= nth) return FindNth(nums1, l1, mid1, nums2, l2, insert, nth);
+                else return FindNth(nums1, mid1, h1, nums2,insert, h2,nth-leftNum);
+            }
+
+            private int FindInsertionLocation(int[] nums, int l1, int h1, int target)
+            {
+                if (nums[h1 - 1] < target) return h1;
+                if (h1 - l1 <= limit)
+                {
+                    var idx = h1 - 1;
+                    while (l1 <= idx && nums[idx] >= target) idx--;
+                    return idx + 1;
+                }
+
+                var mid = (l1 + h1) >> 1;
+                if (nums[mid] >= target && nums[mid - 1] < target) return mid;
+                if (nums[mid] >= target) return FindInsertionLocation(nums, l1, mid, target);
+                return FindInsertionLocation(nums, mid, h1, target);
             }
         }
     }

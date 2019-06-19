@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Leetcode.leetcode.microsoft.SearchAndSort.p9;
 
 
 namespace Leetcode
@@ -56,7 +56,13 @@ namespace Leetcode
         }
         static void Main(string[] args)
         {
-            learn.learnDelegate.DerivedClass.Test();
+//            [1]
+//                [2,3,4,5,6,7,8,9,10]
+//            [6]
+//                [1,2,3,4,5,7,8,9,10]
+            leetcode.microsoft.SearchAndSort.p9.Solution s = new Solution();
+            var median = s.FindMedianSortedArrays(new[] {6}, new[] {1,2, 3, 4, 5, 7, 8, 9, 10});
+            Console.WriteLine($"{median}");
         }
     }
 }
