@@ -96,7 +96,7 @@ namespace Leetcode.learn
 
             public static void MainTest()
             {
-                var t = Task.Run(Decrement);
+                var t = Task.Run((Action) Decrement);
                 for (int i = 0; i < _Total; i++)
                 {
                     lock (_Sync)
