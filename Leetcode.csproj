@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="hifreq2018\linkedlist\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="hifreq2018\linkedlist\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="hifreq2018\linkedlist\**" />
+  </ItemGroup>
+
+</Project>
