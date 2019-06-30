@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Leetcode.leetcode.microsoft.BackTracking.p3.better;
+using Leetcode.leetcode.microsoft.ArrayAndStrings.p10.Answer;
 
 
 namespace Leetcode
@@ -56,18 +56,9 @@ namespace Leetcode
         }
         static void Main(string[] args)
         {
-//            [1]
-//                [2,3,4,5,6,7,8,9,10]
-//            [6]
-//                [1,2,3,4,5,7,8,9,10]
-//            leetcode.microsoft.SearchAndSort.p9.Solution s = new Solution();
-//            var median = s.FindMedianSortedArrays(new[] {6}, new[] {1,2, 3, 4, 5, 7, 8, 9, 10});
-//            Console.WriteLine($"{median}");
             Solution s = new Solution();
-//            "aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba"
-//            "a*******b"
-            
-            Console.WriteLine($"{s.IsMatch("aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba","a*******b")}");
+            var rs = s.trap(new[] {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1});
+            Console.WriteLine($"{rs}");
         }
     }
 }
