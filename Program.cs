@@ -1,7 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using Leetcode.leetcode.microsoft.ArrayAndStrings.p10.Answer;
+using Leetcode.leetcode.facebook.p3.betterBetter;
+using LearnPT = Leetcode.learn.LearnPartial;
 
+class WinForms{}
+
+namespace Namespace1
+{
+    class WinForms{}
+}
+
+namespace Namespace2
+{
+    class WinForms
+    {
+    }
+}
 
 namespace Leetcode
 {
@@ -54,11 +68,17 @@ namespace Leetcode
             int? val = o as int?;
             Console.WriteLine(val.HasValue?val.Value.ToString():"null");
         }
+
         static void Main(string[] args)
         {
-            Solution s = new Solution();
-            var rs = s.trap(new[] {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1});
-            Console.WriteLine($"{rs}");
+            var s = new Solution();
+            var list = s.RemoveInvalidParentheses("()((())h()(()()()))((");//
+            foreach (var str in list)
+            {
+                Console.WriteLine($"{str}");
+            }
+
+            Console.WriteLine($"{list.Count}");
         }
     }
 }
