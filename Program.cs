@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Leetcode.leetcode.facebook.p3.betterBetter;
+using Leetcode.leetcode.facebook.SearchAndSort.p6;
 using LearnPT = Leetcode.learn.LearnPartial;
 
 class WinForms{}
@@ -72,13 +72,8 @@ namespace Leetcode
         static void Main(string[] args)
         {
             var s = new Solution();
-            var list = s.RemoveInvalidParentheses("()((())h()(()()()))((");//
-            foreach (var str in list)
-            {
-                Console.WriteLine($"{str}");
-            }
-
-            Console.WriteLine($"{list.Count}");
+            var rs = s.FirstBadVersion(2126753390);
+            Console.WriteLine($"{rs}");
         }
     }
 }
