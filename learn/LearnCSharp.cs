@@ -2,6 +2,34 @@ using System;
 
 namespace Leetcode.learn
 {
+    public struct Foo
+    {
+        public int Value { get; set; }
+
+        public Foo(int value)
+        {
+            this.Value = value;
+        }
+    }
+    public class TestCheck
+    {
+        public static int count;
+
+        static TestCheck()
+        {
+            count = 10;
+        }
+
+        public TestCheck()
+        {
+            
+        }
+        public static void Test()
+        {
+            var foo =new Foo(10);
+            Console.WriteLine($"{foo.Value}");
+        }
+    }
     class MyClass<T>
     {
         private T _val;

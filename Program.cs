@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Leetcode.leetcode.microsoft.ArrayAndStrings.p10.Answer;
+using Leetcode.leetcode.facebook.recursion.p2;
 
 
 namespace Leetcode
@@ -56,9 +56,7 @@ namespace Leetcode
         }
         static void Main(string[] args)
         {
-            Solution s = new Solution();
-            var rs = s.trap(new[] {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1});
-            Console.WriteLine($"{rs}");
+            Leetcode.learn.TestCheck.Test();
         }
     }
 }
