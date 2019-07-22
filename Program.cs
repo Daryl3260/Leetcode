@@ -1,7 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using Leetcode.leetcode.facebook.recursion.p2;
+using Leetcode.leetcode.facebook.SearchAndSort.p6;
+using LearnPT = Leetcode.learn.LearnPartial;
 
+class WinForms{}
+
+namespace Namespace1
+{
+    class WinForms{}
+}
+
+namespace Namespace2
+{
+    class WinForms
+    {
+    }
+}
 
 namespace Leetcode
 {
@@ -54,9 +68,12 @@ namespace Leetcode
             int? val = o as int?;
             Console.WriteLine(val.HasValue?val.Value.ToString():"null");
         }
+
         static void Main(string[] args)
         {
-            Leetcode.learn.TestCheck.Test();
+            var s = new Solution();
+            var rs = s.FirstBadVersion(2126753390);
+            Console.WriteLine($"{rs}");
         }
     }
 }
