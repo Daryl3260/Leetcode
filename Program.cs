@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Leetcode.leetcode.facebook.SearchAndSort.p6;
 using LearnPT = Leetcode.learn.LearnPartial;
 
 class WinForms{}
@@ -71,8 +70,8 @@ namespace Leetcode
 
         static void Main(string[] args)
         {
-            var s = new Solution();
-            var rs = s.FirstBadVersion(2126753390);
+            var solution = new leetcode.contest.p190728.p3.Solution();
+            var rs = solution.Largest1BorderedSquare(new[] {new[] {1, 1, 1}, new[] {1, 0, 1}, new[] {0, 1, 1}});
             Console.WriteLine($"{rs}");
         }
     }
