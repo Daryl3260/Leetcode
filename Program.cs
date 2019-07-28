@@ -2,19 +2,6 @@
 using System.Collections.Generic;
 using LearnPT = Leetcode.learn.LearnPartial;
 
-class WinForms{}
-
-namespace Namespace1
-{
-    class WinForms{}
-}
-
-namespace Namespace2
-{
-    class WinForms
-    {
-    }
-}
 
 namespace Leetcode
 {
@@ -67,12 +54,12 @@ namespace Leetcode
             int? val = o as int?;
             Console.WriteLine(val.HasValue?val.Value.ToString():"null");
         }
-
         static void Main(string[] args)
         {
             var solution = new leetcode.contest.p190728.p3.Solution();
             var rs = solution.Largest1BorderedSquare(new[] {new[] {1, 1, 1}, new[] {1, 0, 1}, new[] {0, 1, 1}});
             Console.WriteLine($"{rs}");
+
         }
     }
 }
