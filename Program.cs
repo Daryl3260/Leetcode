@@ -1,21 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Leetcode.leetcode.facebook.SearchAndSort.p6;
 using LearnPT = Leetcode.learn.LearnPartial;
 
-class WinForms{}
-
-namespace Namespace1
-{
-    class WinForms{}
-}
-
-namespace Namespace2
-{
-    class WinForms
-    {
-    }
-}
 
 namespace Leetcode
 {
@@ -68,7 +54,6 @@ namespace Leetcode
             int? val = o as int?;
             Console.WriteLine(val.HasValue?val.Value.ToString():"null");
         }
-
         static void Main(string[] args)
         {
             jzoffer.Chapter2.p3.Solution.Test();

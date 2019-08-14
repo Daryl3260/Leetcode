@@ -1,9 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
+//[InternalsVisibleTo("FriendlyAssembly")]
 namespace Leetcode.learn
 {
+    
+    public class TestProgma
+    {
+        public int x;
+    }
     public class LearnAsyncAwait
     {
         public static async Task AsyncTest()
@@ -55,5 +62,12 @@ namespace Leetcode.learn
             Console.WriteLine($"GetHashCode():{x.GetHashCode()}");
             Console.WriteLine();
         }
+    }
+
+//    [InternalsVisibleTo("FriendlyAssembly")]
+    public class SourceClass
+    {
+        public int x;
+        internal int y;
     }
 }
