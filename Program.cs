@@ -56,10 +56,7 @@ namespace Leetcode
         }
         static void Main(string[] args)
         {
-            var solution = new leetcode.contest.p190728.p3.Solution();
-            var rs = solution.Largest1BorderedSquare(new[] {new[] {1, 1, 1}, new[] {1, 0, 1}, new[] {0, 1, 1}});
-            Console.WriteLine($"{rs}");
-
+            jzoffer.Chapter2.p3.Solution.Test();
         }
     }
 }
