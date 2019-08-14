@@ -71,9 +71,7 @@ namespace Leetcode
 
         static void Main(string[] args)
         {
-            var s = new Solution();
-            var rs = s.FirstBadVersion(2126753390);
-            Console.WriteLine($"{rs}");
+            jzoffer.Chapter2.p3.Solution.Test();
         }
     }
 }
