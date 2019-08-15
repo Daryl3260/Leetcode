@@ -7,12 +7,12 @@ namespace Leetcode.jzoffer.Chapter2
     {
         public class Solution
         {
-            public static void Test()
+            public static void Test ()
             {
-                Console.WriteLine($"{new Solution().FindReplicate(new[] {4, 3, 1, 0, 2, 5, 3})}");
+                Console.WriteLine ($"{new Solution().FindReplicate(new[] { 4, 3, 1, 0, 2, 5, 3 })}");
             }
 
-            public int FindReplicate(int[] arr)
+            public int FindReplicate (int[] arr)
             {
                 if (arr == null || arr.Length == 0) return -1;
                 for (var i = 0; i < arr.Length;)
@@ -40,33 +40,33 @@ namespace Leetcode.jzoffer.Chapter2
     {
         public class Solution
         {
-            public static void Test()
+            public static void Test ()
             {
-                Console.WriteLine(new Solution().FindReplicate(new[] {2, 3, 5, 4, 3, 2, 6, 7}));
+                Console.WriteLine (new Solution ().FindReplicate (new [] { 2, 3, 5, 4, 3, 2, 6, 7 }));
             }
 
-            public int FindReplicate(int[] arr)
+            public int FindReplicate (int[] arr)
             {
-                return FindBetween(arr, 1, arr.Length - 1);
+                return FindBetween (arr, 1, arr.Length - 1);
             }
 
-            private int FindBetween(int[] arr, int lo, int hi)
+            private int FindBetween (int[] arr, int lo, int hi)
             {
                 var len = hi - lo + 1;
-                var count = CountBetween(arr, lo, hi);
+                var count = CountBetween (arr, lo, hi);
                 if (len == count) return -1;
                 else
                 {
                     //count>len
                     if (hi - lo < 3)
                     {
-                        var set = new HashSet<int>();
+                        var set = new HashSet<int> ();
                         foreach (var i in arr)
                         {
                             if (lo <= i && i <= hi)
                             {
-                                if (set.Contains(i)) return i;
-                                else set.Add(i);
+                                if (set.Contains (i)) return i;
+                                else set.Add (i);
                             }
                         }
 
@@ -75,14 +75,14 @@ namespace Leetcode.jzoffer.Chapter2
                     else
                     {
                         var mid = (lo + hi) >> 1;
-                        var left = FindBetween(arr, lo, mid);
+                        var left = FindBetween (arr, lo, mid);
                         if (left != -1) return left;
-                        else return FindBetween(arr, mid + 1, hi);
+                        else return FindBetween (arr, mid + 1, hi);
                     }
                 }
             }
 
-            private int CountBetween(int[] arr, int lo, int hi)
+            private int CountBetween (int[] arr, int lo, int hi)
             {
                 var count = 0;
                 foreach (var i in arr)
@@ -99,7 +99,7 @@ namespace Leetcode.jzoffer.Chapter2
     {
         public class Solution
         {
-            public bool SearchInMatrix(int[][] matrix, int target)
+            public bool SearchInMatrix (int[][] matrix, int target)
             {
                 if (matrix == null || matrix.Length == 0 || matrix[0].Length == 0) return false;
                 var rows = matrix.Length;
@@ -130,43 +130,43 @@ namespace Leetcode.jzoffer.Chapter2
             public Node Next { get; set; }
             public int Val { get; set; }
         }
-        
+
         public class Solution
         {
-            public static void Test()
+            public static void Test ()
             {
-                var solution = new Solution();
-                var head = new Node{Val = 1};
-                head.Next = new Node{Val = 2};
-                head.Next.Next = new Node{Val = 3};
-                var list = solution.ReversePrint(head);
+                var solution = new Solution ();
+                var head = new Node { Val = 1 };
+                head.Next = new Node { Val = 2 };
+                head.Next.Next = new Node { Val = 3 };
+                var list = solution.ReversePrint (head);
                 foreach (var item in list)
                 {
-                    Console.WriteLine($"{item}");
+                    Console.WriteLine ($"{item}");
                 }
             }
-            public List<int> ReversePrint(Node head)
+            public List<int> ReversePrint (Node head)
             {
-                if(head==null)return new List<int>();
-                var rs = new List<int>();
-                AddToList(head, rs);
+                if (head == null) return new List<int> ();
+                var rs = new List<int> ();
+                AddToList (head, rs);
                 return rs;
             }
 
-            private void AddToList(Node node, List<int> rs)
+            private void AddToList (Node node, List<int> rs)
             {
                 if (node.Next == null)
                 {
-                    rs.Add(node.Val);
+                    rs.Add (node.Val);
                 }
                 else
                 {
-                    AddToList(node.Next,rs);
-                    rs.Add(node.Val);
+                    AddToList (node.Next, rs);
+                    rs.Add (node.Val);
                 }
             }
         }
-}
+    }
 
     public class TreeNode
     {
@@ -179,15 +179,15 @@ namespace Leetcode.jzoffer.Chapter2
     {
         public class Solution
         {
-            public TreeNode Rebuild(int[] preorder, int[] inorder)
+            public TreeNode Rebuild (int[] preorder, int[] inorder)
             {
                 if (preorder == null || preorder.Length == 0) return null;
-                return Construct(preorder, 0, preorder.Length - 1, inorder, 0, inorder.Length - 1);
+                return Construct (preorder, 0, preorder.Length - 1, inorder, 0, inorder.Length - 1);
             }
 
-            private TreeNode Construct(int[] preorder, int l1, int h1, int[] inorder, int l2, int h2)
+            private TreeNode Construct (int[] preorder, int l1, int h1, int[] inorder, int l2, int h2)
             {
-                var root = new TreeNode{Val = preorder[l1]};
+                var root = new TreeNode { Val = preorder[l1] };
                 var idx = -1;
                 for (var i = l2; i <= h2; i++)
                 {
@@ -202,12 +202,12 @@ namespace Leetcode.jzoffer.Chapter2
                 var rightLen = h2 - idx;
                 if (leftLen > 0)
                 {
-                    return Construct(preorder, l1 + 1, l1 + leftLen, inorder, l2, idx - 1);
+                    return Construct (preorder, l1 + 1, l1 + leftLen, inorder, l2, idx - 1);
                 }
 
                 if (rightLen > 0)
                 {
-                    return Construct(preorder, l1 + leftLen + 1, h1, inorder, idx + 1, h2);
+                    return Construct (preorder, l1 + leftLen + 1, h1, inorder, idx + 1, h2);
                 }
                 return root;
             }
@@ -225,9 +225,9 @@ namespace Leetcode.jzoffer.Chapter2
         }
         public class Solution
         {
-            public TreeNode FindNext(TreeNode node)
+            public TreeNode FindNext (TreeNode node)
             {
-                if (node.Right != null) return LeftMost(node.Right);
+                if (node.Right != null) return LeftMost (node.Right);
                 else
                 {
                     while (true)
@@ -239,7 +239,7 @@ namespace Leetcode.jzoffer.Chapter2
                 }
             }
 
-            private TreeNode LeftMost(TreeNode node)
+            private TreeNode LeftMost (TreeNode node)
             {
                 while (node.Left != null) node = node.Left;
                 return node;
@@ -252,28 +252,40 @@ namespace Leetcode.jzoffer.Chapter2
         public class MyQueue
         {
             public int Count => _stack1.Count + _stack2.Count;
-            private Stack<int> _stack1 = new Stack<int>();
-            private Stack<int> _stack2 = new Stack<int>();
+            private Stack<int> _stack1 = new Stack<int> ();
+            private Stack<int> _stack2 = new Stack<int> ();
 
-            public void Enqueue(int val)
+            public void Enqueue (int val)
             {
-                _stack1.Push(val);
+                _stack1.Push (val);
             }
 
-            public int? Peek()
+            public int? Peek ()
             {
                 if (Count == 0) return null;
                 if (_stack2.Count == 0)
                 {
-                    while(_stack1.Count>0)_stack2.Push(_stack1.Pop());
+                    while (_stack1.Count > 0) _stack2.Push (_stack1.Pop ());
                 }
 
-                return _stack2.Peek();
+                return _stack2.Peek ();
             }
 
-            public int? Dequeue()
-            {
-                
+            public int? Dequeue (){
+                var abc = 10;
+                Console.WriteLine (abc);
+                if (abc < 10)
+                {
+                    Console.WriteLine ("abc<10");
+                }
+                return null;
+            }
+            public static void Test(){
+                Console.WriteLine("abc");
+                var abc = 10;
+                if(abc<11){
+                    Console.WriteLine("less than 11");
+                }
             }
         }
     }
