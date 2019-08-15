@@ -76,4 +76,9 @@ namespace Leetcode.jzoffer.Chapter3
             }
         }
     }
+
+    namespace p2
+    {
+        
+}
 }
