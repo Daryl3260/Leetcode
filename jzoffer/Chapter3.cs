@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
+
 namespace Leetcode.jzoffer.Chapter3
 {
     namespace p1{
@@ -79,6 +81,52 @@ namespace Leetcode.jzoffer.Chapter3
 
     namespace p2
     {
-        
-}
+        public class Solution
+        {
+            public static void Test()
+            {
+                var solution = new Solution();
+                solution.PrintOneToN(5);
+            }
+            public void PrintOneToN(int n)
+            {
+                var list = new List<char>();
+                list.Add('1');
+                while (list.Count <n+1)
+                {
+                    Console.WriteLine($"{ToStr(list)}");
+                    Next(list);
+                }
+            }
+
+            public void Next(List<char> list)
+            {
+                var i = 0;
+                for (; i < list.Count; i++)
+                {
+                    if (list[i] != '9')
+                    {
+                        list[i] = (char)(list[i] + 1);
+                        break;
+                    }
+                    else
+                    {
+                        list[i] = '0';
+                    }
+                }
+                if(i==list.Count)list.Add('1');
+            }
+
+            public string ToStr(List<char> list)
+            {
+                var builder = new StringBuilder();
+                var len = list.Count;
+                for (var i = len - 1; i > -1; i--)
+                {
+                    builder.Append(list[i]);
+                }
+                return builder.ToString();
+            }
+        }
+    }
 }
