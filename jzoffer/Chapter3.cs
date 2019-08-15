@@ -129,4 +129,33 @@ namespace Leetcode.jzoffer.Chapter3
             }
         }
     }
+
+    namespace p3
+    {
+        public class Node
+        {
+            public int Val { get; set; }
+            public Node Next { get; set; }
+        }
+        public class Solution
+        {
+            public Node DeleteNode(Node head, Node node)
+            {
+                var header = new Node();
+                header.Next = head;
+                if (node.Next != null)
+                {
+                    node.Val = node.Next.Val;
+                    node.Next = node.Next.Next;
+                }
+                else
+                {
+                    var p = header;
+                    while (p.Next != node) p = p.Next;
+                    p.Next = null;
+                }
+                return header.Next;
+            }
+        }
+}
 }
