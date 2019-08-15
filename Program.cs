@@ -54,9 +54,8 @@ namespace Leetcode
             int? val = o as int?;
             Console.WriteLine(val.HasValue?val.Value.ToString():"null");
         }
-        static void Main(string[] args)
-        {
-            jzoffer.Chapter2.p3.Solution.Test();
+        static void Main(string[] args){
+            jzoffer.Chapter3.p2.Solution.Test();
         }
     }
 }

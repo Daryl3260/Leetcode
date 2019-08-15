@@ -10,6 +10,7 @@ namespace Leetcode.jzoffer.Chapter2
             public static void Test ()
             {
                 Console.WriteLine ($"{new Solution().FindReplicate(new[] {4, 3, 1, 0, 2, 5, 3})}");
+
             }
 
             public int FindReplicate (int[] arr)
@@ -260,18 +261,36 @@ namespace Leetcode.jzoffer.Chapter2
                 _stack1.Push (val);
             }
 
-            public int? Peek (){
+
+            public int? Peek ()
+            {
+
                 if (Count == 0) return null;
                 if (_stack2.Count == 0)
                 {
                     while (_stack1.Count > 0) _stack2.Push (_stack1.Pop ());
                 }
 
-                return _stack2.Peek();
+                return _stack2.Peek ();
             }
 
             public int? Dequeue (){
-                return -1;
+
+                var abc = 10;
+                Console.WriteLine (abc);
+                if (abc < 10)
+                {
+                    Console.WriteLine ("abc<10");
+                }
+                return null;
+            }
+            public static void Test(){
+                Console.WriteLine("abc");
+                var abc = 10;
+                if(abc<11){
+                    Console.WriteLine("less than 11");
+                }
+
             }
         }
     }
