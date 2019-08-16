@@ -55,7 +55,8 @@ namespace Leetcode
             Console.WriteLine(val.HasValue?val.Value.ToString():"null");
         }
         static void Main(string[] args){
-            jzoffer.Chapter3.p2.Solution.Test();
+//            jzoffer.Chapter3.p4.Solution.Test();
+            utils.QuickSortClass.Test();
         }
     }
 }
