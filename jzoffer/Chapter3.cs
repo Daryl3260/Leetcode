@@ -179,6 +179,7 @@ namespace Leetcode.jzoffer.Chapter3
                 return header.Next;
             }
         }
+<<<<<<< HEAD
     }
 
     namespace p4
@@ -189,10 +190,18 @@ namespace Leetcode.jzoffer.Chapter3
             public Node Next { get; set; }
         }
 
+=======
+}
+
+    namespace p4
+    {
+        
+>>>>>>> 8c1a9c6e32301651d4bbf3774f863f03998a7fff
         public class Solution
         {
             public static void Test()
             {
+<<<<<<< HEAD
                 var head = new Node {Val = 1};
                 head.Next = new Node {Val = 2};
                 head.Next.Next = new Node {Val = 2};
@@ -307,4 +316,124 @@ namespace Leetcode.jzoffer.Chapter3
             }
         }
     }
+=======
+                var arr = new[] {1, 2, 3, 4, 5, 6};
+                new Solution().BetterReorder(arr);
+                foreach (var num in arr)
+                {
+                    Console.Write(num+"\t");
+                }
+            }
+
+            public void Reorder(int[] arr)
+            {
+                if (arr == null || arr.Length < 1) return;
+                var odds = new List<int>();
+                var evens = new List<int>();
+                foreach (var num in arr)
+                {
+                    if((num&0x1)==1)odds.Add(num);
+                    else evens.Add(num);
+                }
+
+                var i = 0;
+                foreach (var num in odds)
+                {
+                    arr[i++] = num;
+                }
+
+                foreach (var num in evens)
+                {
+                    arr[i++] = num;
+                }
+            }
+
+            public void BetterReorder(int[] arr)
+            {
+                if (arr == null || arr.Length < 1) return;
+                var oddBorder = -1;
+                for (var i = 1; i < arr.Length; i++)
+                {
+                    if ((arr[i] & 0x1) == 1)
+                    {
+                        var temp = arr[oddBorder + 1];
+                        arr[oddBorder + 1] = arr[i];
+                        arr[i] = temp;
+                        oddBorder++;
+                    }
+                }
+            }
+            
+        }
+}
+
+    namespace p5
+    {
+        public class Node
+        {
+            public int Val { get; set; }
+            public Node Next { get; set; }
+        }
+
+        public class Solution
+        {
+            public Node LastK(Node head,int k)
+            {
+                if (head == null || k<1) return null;
+                var header = new Node();
+                header.Next = head;
+                var back = head;
+                var front = head;
+                for (var i = 1; i < k; i++)
+                {
+                    if (front.Next == null) return null;
+                    else front = front.Next;
+                }
+
+                while (front.Next != null)
+                {
+                    front = front.Next;
+                    back = back.Next;
+                }
+                return back;
+            }
+        }
+}
+
+    namespace p6
+    {
+        public class Node
+        {
+            public int Val { get; set; }
+            public Node Next { get; set; }
+        }
+
+        public class Solution
+        {
+            public Node Interjunction(Node head)
+            {
+                if (head == null || head.Next == null) return null;
+                var header = new Node{Next = head};
+                var fast = header;
+                var slow = header;
+                while (true)
+                {
+                    if (fast.Next == null || fast.Next.Next == null) return null;
+                    fast = fast.Next.Next;
+                    slow = slow.Next;
+                    if (fast == slow) return fast;
+                }
+            }
+        }
+    }
+
+    namespace p7
+    {
+        public class Solution
+        {
+            
+        }
+    }
+
+>>>>>>> 8c1a9c6e32301651d4bbf3774f863f03998a7fff
 }

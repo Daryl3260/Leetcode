@@ -9,7 +9,8 @@ namespace Leetcode.jzoffer.Chapter2
         {
             public static void Test ()
             {
-                Console.WriteLine ($"{new Solution().FindReplicate(new[] { 4, 3, 1, 0, 2, 5, 3 })}");
+                Console.WriteLine ($"{new Solution().FindReplicate(new[] {4, 3, 1, 0, 2, 5, 3})}");
+
             }
 
             public int FindReplicate (int[] arr)
@@ -260,8 +261,10 @@ namespace Leetcode.jzoffer.Chapter2
                 _stack1.Push (val);
             }
 
+
             public int? Peek ()
             {
+
                 if (Count == 0) return null;
                 if (_stack2.Count == 0)
                 {
@@ -272,6 +275,7 @@ namespace Leetcode.jzoffer.Chapter2
             }
 
             public int? Dequeue (){
+
                 var abc = 10;
                 Console.WriteLine (abc);
                 if (abc < 10)
@@ -286,6 +290,7 @@ namespace Leetcode.jzoffer.Chapter2
                 if(abc<11){
                     Console.WriteLine("less than 11");
                 }
+
             }
         }
     }
