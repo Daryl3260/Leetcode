@@ -179,144 +179,18 @@ namespace Leetcode.jzoffer.Chapter3
                 return header.Next;
             }
         }
-<<<<<<< HEAD
-    }
 
-    namespace p4
-    {
-        public class Node
-        {
-            public int Val { get; set; }
-            public Node Next { get; set; }
-        }
-
-=======
 }
 
     namespace p4
     {
         
->>>>>>> 8c1a9c6e32301651d4bbf3774f863f03998a7fff
+
         public class Solution
         {
             public static void Test()
             {
-<<<<<<< HEAD
-                var head = new Node {Val = 1};
-                head.Next = new Node {Val = 2};
-                head.Next.Next = new Node {Val = 2};
-                head.Next.Next.Next = new Node {Val = 3};
-                head = new Solution().DeleteDuplicate(head);
-                while (head != null)
-                {
-                    Console.WriteLine($"{head.Val}");
-                    head = head.Next;
-                }
-            }
 
-            public Node DeleteDuplicate(Node head)
-            {
-                var header = new Node();
-                header.Next = head;
-                var p = head;
-                while (p != null)
-                {
-                    var q = p;
-                    while (q != null && q.Val == p.Val) q = q.Next;
-                    p.Next = q;
-                    p = q;
-                }
-
-                return header.Next;
-            }
-        }
-    }
-
-    namespace p5
-    {
-        public class Solution
-        {
-            public static void Test()
-            {/*
-            "mississippi"
-"mis*is*p*."
-            */
-                Console.WriteLine($"{new Solution().IsMatch("a","c*d*e*a")}");//"mississippi","mis*is*p*."
-            }
-            private bool[][] trapped;
-            public bool IsMatch(string s, string p)
-            {
-                if (string.IsNullOrEmpty(s))
-                {
-                    if (string.IsNullOrEmpty(p)) return true;
-                    for (var i = 0; i < p.Length;)
-                    {
-                        if (i < p.Length - 1 && p[i + 1] == '*') i += 2;
-                        else return false;
-                    }
-                    return true;
-                }
-                else if (string.IsNullOrEmpty(p)) return false;
-
-                var sLen = s.Length;
-                var plen = p.Length;
-                trapped = new bool[sLen+1][];
-                for (var i = 0; i < sLen; i++)
-                {
-                    for (var j = 0; j < plen; j++)
-                    {
-                        trapped[i] = new bool[plen+1];
-                    }
-                }
-                return SubMatch(s, 0, p, 0);
-            }
-
-            private bool SubMatch(string s, int i, string p, int j)
-            {
-                bool rs;
-                if (i == s.Length)
-                {
-//                    return j == p.Length || (j == p.Length - 2 && p[j + 1] == '*');
-                    if (j == p.Length) return true;
-                    for (var k = j; k < p.Length;)
-                    {
-                        if (k < p.Length - 1 && p[k + 1] == '*') k += 2;
-                        else return false;
-                    }
-
-                    return true;
-                }
-                else if (j == p.Length || trapped[i][j])
-                {
-                    return false;
-                }
-                
-                if (j < p.Length - 1 && p[j + 1] == '*')
-                {
-                    if (s[i] == p[j] || p[j] == '.')
-                    {
-                        rs = SubMatch(s, i + 1, p, j) || SubMatch(s, i, p, j + 2);
-                    }
-                    else
-                    {
-                        rs = SubMatch(s, i, p, j + 2);
-                    }
-                    
-                }
-                else
-                {
-                    if (s[i] == p[j] || p[j] == '.') rs = SubMatch(s, i + 1, p, j + 1);
-                    else rs = false;
-                }
-                if (!rs)
-                {
-                    trapped[i][j] = true;
-                }
-                return rs;
-            }
-        }
-    }
-=======
                 var arr = new[] {1, 2, 3, 4, 5, 6};
                 new Solution().BetterReorder(arr);
                 foreach (var num in arr)
@@ -434,6 +308,5 @@ namespace Leetcode.jzoffer.Chapter3
             
         }
     }
-
->>>>>>> 8c1a9c6e32301651d4bbf3774f863f03998a7fff
+    
 }
