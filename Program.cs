@@ -56,7 +56,8 @@ namespace Leetcode
         }
         static void Main(string[] args){
 //            jzoffer.Chapter3.p4.Solution.Test();
-            utils.QuickSortClass.Test();
+//            utils.QuickSortClass.Test();
+            Console.WriteLine($"{26*26+1*25}");
         }
     }
 }
