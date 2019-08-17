@@ -57,7 +57,7 @@ namespace Leetcode
         static void Main(string[] args){
 
 //            jzoffer.Chapter3.p4.Solution.Test();
-            utils.QuickSortClass.Test();
+            leetcode.mock.p20190817.Mock.p3.Solution.Test();
 
         }
     }
