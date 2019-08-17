@@ -4,45 +4,61 @@ using System.Text;
 
 namespace Leetcode.jzoffer.Chapter3
 {
-    namespace p1{
-        public class Solution{
+    namespace p1
+    {
+        public class Solution
+        {
 
-            public static void Test(){
+            public static void Test()
+            {
                 var solution = new Solution();
-                Console.WriteLine(solution.Power(2,8));
+                Console.WriteLine(solution.Power(2, 8));
             }
-            public double Power(double num,int exponent){
-                if(exponent<0)return 1.0 / PositivePower(num, exponent);
+
+            public double Power(double num, int exponent)
+            {
+                if (exponent < 0) return 1.0 / PositivePower(num, exponent);
                 return PositivePower(num, exponent);
             }
-            public double PositivePower(double num,int exponent){
-                if(exponent==0)return 1.0;
-                if(exponent==1)return num;
-                if(num==0||num==1)return num;
+
+            public double PositivePower(double num, int exponent)
+            {
+                if (exponent == 0) return 1.0;
+                if (exponent == 1) return num;
+                if (num == 0 || num == 1) return num;
                 var dict = buildDict(num, exponent);
                 return SubPower(num, exponent, dict);
             }
-            private Dictionary<int,double> buildDict(double num,int exponent){
+
+            private Dictionary<int, double> buildDict(double num, int exponent)
+            {
                 var dict = new Dictionary<int, double>();
                 dict[0] = 1.0;
                 dict[1] = num;
                 var n = num;
                 var exp = 1;
-                while(exponent>(exp<<1)){
+                while (exponent > (exp << 1))
+                {
                     n *= n;
                     exp <<= 1;
                     dict[exp] = n;
                 }
+
                 return dict;
             }
-            private double SubPower(double num,int exponent,Dictionary<int,double> dict){
-                if(dict.ContainsKey(exponent))return dict[exponent];
+
+            private double SubPower(double num, int exponent, Dictionary<int, double> dict)
+            {
+                if (dict.ContainsKey(exponent)) return dict[exponent];
                 var max = 0;
-                foreach(var key in dict.Keys){
-                    if(key<exponent&&key>max){
+                foreach (var key in dict.Keys)
+                {
+                    if (key < exponent && key > max)
+                    {
                         max = key;
                     }
                 }
+
                 return SubPower(num, exponent - max, dict) * dict[max];
             }
         }
@@ -58,9 +74,10 @@ namespace Leetcode.jzoffer.Chapter3
                 var s2 = new Solution();
                 var num = 2;
                 var exponent = 11;
-                Console.WriteLine($"{s1.PositivePower(2,11)}");
-                Console.WriteLine($"{s2.PositivePower(2,11)}");
+                Console.WriteLine($"{s1.PositivePower(2, 11)}");
+                Console.WriteLine($"{s2.PositivePower(2, 11)}");
             }
+
             public double Power(double num, int exponent)
             {
                 if (exponent < 0) return PositivePower(num, -exponent);
@@ -88,11 +105,12 @@ namespace Leetcode.jzoffer.Chapter3
                 var solution = new Solution();
                 solution.PrintOneToN(5);
             }
+
             public void PrintOneToN(int n)
             {
                 var list = new List<char>();
                 list.Add('1');
-                while (list.Count <n+1)
+                while (list.Count < n + 1)
                 {
                     Console.WriteLine($"{ToStr(list)}");
                     Next(list);
@@ -106,7 +124,7 @@ namespace Leetcode.jzoffer.Chapter3
                 {
                     if (list[i] != '9')
                     {
-                        list[i] = (char)(list[i] + 1);
+                        list[i] = (char) (list[i] + 1);
                         break;
                     }
                     else
@@ -114,7 +132,8 @@ namespace Leetcode.jzoffer.Chapter3
                         list[i] = '0';
                     }
                 }
-                if(i==list.Count)list.Add('1');
+
+                if (i == list.Count) list.Add('1');
             }
 
             public string ToStr(List<char> list)
@@ -125,6 +144,7 @@ namespace Leetcode.jzoffer.Chapter3
                 {
                     builder.Append(list[i]);
                 }
+
                 return builder.ToString();
             }
         }
@@ -137,6 +157,7 @@ namespace Leetcode.jzoffer.Chapter3
             public int Val { get; set; }
             public Node Next { get; set; }
         }
+
         public class Solution
         {
             public Node DeleteNode(Node head, Node node)
@@ -154,18 +175,22 @@ namespace Leetcode.jzoffer.Chapter3
                     while (p.Next != node) p = p.Next;
                     p.Next = null;
                 }
+
                 return header.Next;
             }
         }
+
 }
 
     namespace p4
     {
         
+
         public class Solution
         {
             public static void Test()
             {
+
                 var arr = new[] {1, 2, 3, 4, 5, 6};
                 new Solution().BetterReorder(arr);
                 foreach (var num in arr)
@@ -283,5 +308,5 @@ namespace Leetcode.jzoffer.Chapter3
             
         }
     }
-
+    
 }

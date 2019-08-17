@@ -55,9 +55,11 @@ namespace Leetcode
             Console.WriteLine(val.HasValue?val.Value.ToString():"null");
         }
         static void Main(string[] args){
+
 //            jzoffer.Chapter3.p4.Solution.Test();
-//            utils.QuickSortClass.Test();
-            Console.WriteLine($"{26*26+1*25}");
+
+            leetcode.mock.p20190817.Mock.p3.Solution.Test();
+
         }
     }
 }
