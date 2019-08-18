@@ -57,7 +57,7 @@ namespace Leetcode
         static void Main(string[] args){
 
 //            jzoffer.Chapter3.p4.Solution.Test();
-            leetcode.mock.p20190817.Mock.p3.Solution.Test();
+            leetcode.recursion.recursionV2.p2.Solution.Test();
 
         }
     }
