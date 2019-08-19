@@ -58,7 +58,6 @@ namespace Leetcode.arproject
         
         public class Vertex:IComparable<Vertex>
         {
-            public int Direction { get; set; }
             public int X { get; set; }
             public int Y { get; set; }
             public Vertex Previous { get; set; }
