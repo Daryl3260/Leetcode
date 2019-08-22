@@ -92,7 +92,7 @@ namespace Leetcode.arproject
             _endX = endX;
             _endY = endY;
             _map = new Vertex[rows][];
-            FindPath(x, y, endX, endY, rows, cols);
+            FindPath(x, y, rows, cols);
             if(_map[endX][endY].Previous==null)return new List<int>();
             var pathLinked = new LinkedList<Vertex>();
             var p = _map[endX][endY];
@@ -170,7 +170,7 @@ namespace Leetcode.arproject
             return rs;
         }
 
-        private void FindPath(int x, int y, int endX, int endY, int rows, int cols)
+        private void FindPath(int x, int y, int rows, int cols)
         {
             for (var i = 0; i < rows; i++)
             {
@@ -220,7 +220,7 @@ namespace Leetcode.arproject
                 }
             }
 
-            var p = _map[endX][endY];
+            var p = _map[_endX][_endY];
             while (p != null)
             {
                 Console.Write($"({p.X},{p.Y}) <- ");

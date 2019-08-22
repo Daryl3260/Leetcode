@@ -58,7 +58,7 @@ namespace Leetcode
 
 //            jzoffer.Chapter3.p4.Solution.Test();
 
-            arproject.Navigation.Test();
+            leetcode.trie.p6.Solution.Test();
         }
     }
 }
