@@ -345,7 +345,7 @@ namespace Leetcode.leetcode.trie
 
     namespace p3
     {
-        
+
         public class AutocompleteSystem
         {
             public class SentenceComparator : Comparer<Tuple<string, int>>
@@ -360,10 +360,11 @@ namespace Leetcode.leetcode.trie
                     }
                 }
             }
+
             public class Node
             {
-                public int Freq { get; set; }//0: not end
-                public Dictionary<char,Node> _children = new Dictionary<char, Node>();
+                public int Freq { get; set; } //0: not end
+                public Dictionary<char, Node> _children = new Dictionary<char, Node>();
 
                 public Node this[char key]
                 {
@@ -378,22 +379,24 @@ namespace Leetcode.leetcode.trie
                  * ["AutocompleteSystem","input","input","input","input"]
 [[["i love you","island","iroman","i love leetcode"],[5,3,2,2]],["i"],[" "],["l"],["#"]]
                  */
-                var sentences = new[] {"i love you","island","iroman","i love leetcode" };
-                var times = new[] {5,3,2,2 };
-                var testArr = new[] {'i',' ','a','#'};
+                var sentences = new[] {"i love you", "island", "iroman", "i love leetcode"};
+                var times = new[] {5, 3, 2, 2};
+                var testArr = new[] {'i', ' ', 'a', '#'};
                 var auto = new AutocompleteSystem(sentences, times);
                 foreach (var ch in testArr)
                 {
                     var rs = auto.Input(ch);
                     foreach (var str in rs)
                     {
-                        Console.Write(str+"\t");
+                        Console.Write(str + "\t");
                     }
 
                     Console.WriteLine($"");
                 }
             }
+
             private Node _root;
+
             public void Insert(string sentence, int time)
             {
                 var idx = 0;
@@ -417,7 +420,7 @@ namespace Leetcode.leetcode.trie
                     idx++;
                 }
             }
-            
+
             public AutocompleteSystem(string[] sentences, int[] times)
             {
                 if (sentences == null || sentences.Length == 0) return;
@@ -425,11 +428,13 @@ namespace Leetcode.leetcode.trie
                 var len = sentences.Length;
                 for (int i = 0; i < len; i++)
                 {
-                    Insert(sentences[i],times[i]);
+                    Insert(sentences[i], times[i]);
                 }
+
                 Init();
-                
+
             }
+
             private static SentenceComparator _comparator = new SentenceComparator();
             private Node node;
             private List<Tuple<string, int>> searchRS = new List<Tuple<string, int>>();
@@ -441,7 +446,9 @@ namespace Leetcode.leetcode.trie
                 searchRS.Clear();
                 prev.Clear();
             }
+
             private const int TOPN = 3;
+
             public IList<string> Input(char c)
             {
                 var rs = new List<string>();
@@ -454,8 +461,8 @@ namespace Leetcode.leetcode.trie
                 {
                     var searchNode = node[c];
                     if (searchNode == null)
-                    { 
-                        node[c]=new Node();
+                    {
+                        node[c] = new Node();
                         node = node[c];
                         searchRS.Clear();
                     }
@@ -463,7 +470,7 @@ namespace Leetcode.leetcode.trie
                     {
                         prev.Add(c);
                         searchRS.Clear();
-                        SubSearch(searchNode,prev,searchRS);
+                        SubSearch(searchNode, prev, searchRS);
                         searchRS.Sort(_comparator);
                         node = searchNode;
                     }
@@ -474,12 +481,13 @@ namespace Leetcode.leetcode.trie
                 {
                     rs.Add(searchRS[i].Item1);
                 }
+
                 return rs;
             }
-            
-            
 
-            private void SubSearch(Node node, List<char> prev,List<Tuple<string,int>> rs)
+
+
+            private void SubSearch(Node node, List<char> prev, List<Tuple<string, int>> rs)
             {
                 if (node.Freq > 0)
                 {
@@ -491,12 +499,12 @@ namespace Leetcode.leetcode.trie
                     var key = child.Key;
                     var childNode = child.Value;
                     prev.Add(key);
-                    SubSearch(childNode,prev,rs);
-                    prev.RemoveAt(prev.Count-1);
+                    SubSearch(childNode, prev, rs);
+                    prev.RemoveAt(prev.Count - 1);
                 }
             }
-            
-            
+
+
         }
 
 /**
@@ -508,18 +516,22 @@ namespace Leetcode.leetcode.trie
 
     namespace p4
     {
-        public class WordDictionary {
+        public class WordDictionary
+        {
             public class Node
             {
                 public bool IsEnd { get; set; }
                 public Node[] _children = new Node[26];
             }
+
             private Node _root = new Node();
+
             /** Initialize your data structure here. */
-            public WordDictionary() {
-                
+            public WordDictionary()
+            {
+
             }
-    
+
             /** Adds a word into the data structure. */
             public void AddWord(string word)
             {
@@ -544,7 +556,7 @@ namespace Leetcode.leetcode.trie
                     node = node._children[key];
                 }
             }
-    
+
             /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */
             public bool Search(string word)
             {
@@ -552,7 +564,7 @@ namespace Leetcode.leetcode.trie
                 return SubSearch(word, 0, _root);
             }
 
-            private bool SubSearch(string word, int idx,Node node)
+            private bool SubSearch(string word, int idx, Node node)
             {
                 if (idx == word.Length) return node.IsEnd;
                 if (word[idx] != '.')
@@ -566,11 +578,12 @@ namespace Leetcode.leetcode.trie
                     {
                         if (next != null && SubSearch(word, idx + 1, next)) return true;
                     }
+
                     return false;
                 }
             }
         }
-}
+    }
 
     namespace p5
     {
@@ -578,9 +591,10 @@ namespace Leetcode.leetcode.trie
         {
             public static void Test()
             {
-                var solution =  new Solution();
-                Console.WriteLine($"{solution.FindMaximumXOR(new []{3, 10, 5, 25, 2, 8})}");
+                var solution = new Solution();
+                Console.WriteLine($"{solution.FindMaximumXOR(new[] {3, 10, 5, 25, 2, 8})}");
             }
+
             public class Node
             {
                 public int Val { get; set; }
@@ -603,7 +617,7 @@ namespace Leetcode.leetcode.trie
                     var next = node[key];
                     if (next == null)
                     {
-                        node[key]=new Node();
+                        node[key] = new Node();
                         next = node[key];
                     }
 
@@ -628,8 +642,9 @@ namespace Leetcode.leetcode.trie
 
                 return node.Val ^ num;
             }
-            
+
             private Node _root = new Node();
+
             public int FindMaximumXOR(int[] nums)
             {
                 foreach (var num in nums)
@@ -651,9 +666,10 @@ namespace Leetcode.leetcode.trie
 
     namespace p6
     {
-        
-        
-        public class Solution {
+
+
+        public class Solution
+        {
             public class Node
             {
                 public int Val { get; set; }
@@ -667,7 +683,7 @@ namespace Leetcode.leetcode.trie
                 }
             }
 
-            public void Insert(string word,int index,Node root)
+            public void Insert(string word, int index, Node root)
             {
                 if (string.IsNullOrEmpty(word)) return;
                 var node = root;
@@ -684,7 +700,7 @@ namespace Leetcode.leetcode.trie
                     var key = word[idx] - 'a';
                     if (node[key] == null)
                     {
-                        node[key]=new Node();
+                        node[key] = new Node();
                     }
 
                     node = node[key];
@@ -692,15 +708,16 @@ namespace Leetcode.leetcode.trie
                 }
             }
 
-            private List<int> FindSelfPalindrome(Node node,bool completeInvert = true)
+            private List<int> FindSelfPalindrome(Node node, bool completeInvert = true)
             {
                 var prefix = new List<char>();
                 var indexes = new List<int>();
-                SubSearchSelfPalindrome(node,prefix,indexes,node,completeInvert);
+                SubSearchSelfPalindrome(node, prefix, indexes, node, completeInvert);
                 return indexes;
             }
 
-            private void SubSearchSelfPalindrome(Node node, List<char> prefix,List<int> indexes,Node top,bool completeInvert)
+            private void SubSearchSelfPalindrome(Node node, List<char> prefix, List<int> indexes, Node top,
+                bool completeInvert)
             {
                 if (node.IsEnd)
                 {
@@ -721,7 +738,7 @@ namespace Leetcode.leetcode.trie
                         }
                     }
 
-                    if (palin && (node!=top||completeInvert))
+                    if (palin && (node != top || completeInvert))
                     {
                         indexes.Add(node.Val);
                     }
@@ -731,13 +748,13 @@ namespace Leetcode.leetcode.trie
                 {
                     if (node[i] == null) continue;
                     var key = i + 'a';
-                    prefix.Add((char)key);
-                    SubSearchSelfPalindrome(node[i],prefix,indexes,top,completeInvert);
-                    prefix.RemoveAt(prefix.Count-1);
+                    prefix.Add((char) key);
+                    SubSearchSelfPalindrome(node[i], prefix, indexes, top, completeInvert);
+                    prefix.RemoveAt(prefix.Count - 1);
                 }
-                
+
             }
-            
+
             private Node _original = new Node();
             private Node _inverted = new Node();
 
@@ -757,7 +774,8 @@ namespace Leetcode.leetcode.trie
             public static void Test()
             {
                 var solution = new Solution();
-                var rs = solution.PalindromePairs(new[] {"a","b","c","ab","ac","aa"});//"abcd", "dcba", "lls", "s", "sssll"
+                var rs = solution.PalindromePairs(new[]
+                    {"a", "b", "c", "ab", "ac", "aa"}); //"abcd", "dcba", "lls", "s", "sssll"
                 foreach (var pair in rs)
                 {
                     Console.WriteLine($"({pair[0]},{pair[1]})");
@@ -786,12 +804,15 @@ namespace Leetcode.leetcode.trie
                     i++;
                     j--;
                 }
+
                 return true;
             }
-            public IList<IList<int>> PalindromePairs(string[] words) {
+
+            public IList<IList<int>> PalindromePairs(string[] words)
+            {
                 var emptyStrList = new List<int>();
                 var selfInverted = new List<int>();
-                for (var i =0;i<words.Length;i++)
+                for (var i = 0; i < words.Length; i++)
                 {
 //                    
                     var word = words[i];
@@ -802,14 +823,14 @@ namespace Leetcode.leetcode.trie
                     }
                     else
                     {
-                        if(SelfInverted(word))selfInverted.Add(i);
-                        Insert(Invert(word),i,_inverted);
-                        Insert(word,i,_original);
+                        if (SelfInverted(word)) selfInverted.Add(i);
+                        Insert(Invert(word), i, _inverted);
+                        Insert(word, i, _original);
                     }
                 }
-                
+
                 var rs = new List<IList<int>>();
-                for (var i = 0;i<words.Length;i++)
+                for (var i = 0; i < words.Length; i++)
                 {
                     var word = words[i];
                     if (string.IsNullOrEmpty(word)) continue;
@@ -819,21 +840,21 @@ namespace Leetcode.leetcode.trie
                         var selfPalin = FindSelfPalindrome(subtractionNode);
                         foreach (var i2 in selfPalin)
                         {
-                            if(i2==i)continue;
-                            rs.Add(new List<int>{i,i2});
+                            if (i2 == i) continue;
+                            rs.Add(new List<int> {i, i2});
                         }
                     }
-                    
+
 
                     var invertedWord = Invert(word);
                     subtractionNode = FindSubtraction(invertedWord, _original);
                     if (subtractionNode != null)
                     {
-                        var selfPalin = FindSelfPalindrome(subtractionNode,false);
+                        var selfPalin = FindSelfPalindrome(subtractionNode, false);
                         foreach (var i2 in selfPalin)
                         {
-                            if(i2==i)continue;
-                            rs.Add(new List<int>{i2,i});
+                            if (i2 == i) continue;
+                            rs.Add(new List<int> {i2, i});
                         }
                     }
                 }
@@ -844,8 +865,8 @@ namespace Leetcode.leetcode.trie
                     {
                         if (i1 != i2)
                         {
-                            rs.Add(new List<int>{i2,i1});
-                            rs.Add(new List<int>{i1,i2});
+                            rs.Add(new List<int> {i2, i1});
+                            rs.Add(new List<int> {i1, i2});
                         }
                     }
                 }
@@ -853,5 +874,236 @@ namespace Leetcode.leetcode.trie
                 return rs;
             }
         }
-}
+    }
+
+    namespace p7
+    {
+        public class Solution
+        {
+            public class Node
+            {
+                public bool IsEnd { get; set; }
+                public Node[] _children = new Node[26];
+                public List<string> WordsWithPrefix = new List<string>();
+
+                public Node this[int idx]
+                {
+                    get => _children[idx];
+                    set => _children[idx] = value;
+                }
+            }
+            private Node _root = new Node();
+
+            public void Insert(string word)
+            {
+                var idx = 0;
+                var node = _root;
+                while (true)
+                {
+                    if (idx == word.Length)
+                    {
+                        node.IsEnd = true;
+                        node.WordsWithPrefix.Add(word);
+                        break;
+                    }
+
+                    var key = word[idx];
+                    if (node[key - 'a'] == null)
+                    {
+                        node[key-'a']=new Node();
+                    }
+                    node = node[key - 'a'];
+                    node.WordsWithPrefix.Add(word);
+                    idx++;
+                }
+            }
+
+            public List<string> FindPrefix(string prefix)
+            {
+                var node = _root;
+                var idx = 0;
+                while (true)
+                {
+                    if (idx == prefix.Length) return node.WordsWithPrefix;
+                    var ch = prefix[idx];
+                    if(node[ch-'a']==null)return new List<string>();
+                    node = node[ch - 'a'];
+                    idx++;
+                }
+            }
+
+            public static void Test()
+            {
+                var solution  = new Solution();
+                var rs = solution.WordSquares(new[] {"area", "lead", "wall", "lady", "ball"});
+                foreach (var list in rs)
+                {
+                    foreach (var word in list)
+                    {
+                        Console.Write($"{word}\t");
+                    }
+                    Console.WriteLine();
+                }
+            }
+            public IList<IList<string>> WordSquares(string[] words)
+            {
+                if(words==null||words.Length==0||words[0].Length==0)return new List<IList<string>>();
+                if (words[0].Length == 1)
+                {
+                    var rs = new List<IList<string>>();
+                    foreach (var word in words)
+                    {
+                        rs.Add(new List<string>{word});
+                    }
+                    return rs;
+                }
+                var res = new List<IList<string>>();
+                var added = new List<string>();
+                foreach (var word in words)
+                {
+                    Insert(word);
+                }
+                foreach (var word in words)
+                {
+                    added.Add(word);
+                    SubSearch(added,res);
+                    added.RemoveAt(added.Count-1);
+                }
+
+                return res;
+            }
+
+            private void SubSearch(IList<string> added, IList<IList<string>> rs)
+            {
+                var len = added[0].Length;
+                if (added.Count == len)
+                {
+                    rs.Add(new List<string>(added));
+                    return;
+                }
+                var addedLen = added.Count;
+                var builder = new StringBuilder(addedLen);
+                foreach (var addedWord in added)
+                {
+                    builder.Append(addedWord[addedLen]);
+                }
+
+                var prefix = builder.ToString();
+                var candidates = FindPrefix(prefix);
+                foreach (var candidate in candidates)
+                {
+                    added.Add(candidate);
+                    SubSearch(added,rs);
+                    added.RemoveAt(added.Count-1);
+                }
+            }
+        }
+    }
+
+    namespace p7.answer
+    {
+        public class Solution
+        {
+            public IList<IList<string>> WordSquares(string[] words)
+            {
+                var n = words.Length;
+
+                var trie = new Trie();
+
+                for (int i = 0; i < n; i++)
+                {
+                    trie.AddWord(words[i], i);
+                }
+
+                var result = new List<IList<string>>();
+
+                foreach (var word in words)
+                {
+                    var oneResult = new List<string>();
+                    oneResult.Add(word);
+                    DFS(words, 1, trie, oneResult, result);
+                }
+
+                return result;
+            }
+
+            private void DFS(string[] words, int depth, Trie trie, IList<string> oneResult, IList<IList<string>> result)
+            {
+                if (depth >= words[0].Length)
+                {
+                    result.Add(new List<string>(oneResult));
+                    return;
+                }
+
+                string str = "";
+
+                for (int i = 0; i < depth; i++)
+                {
+                    str += oneResult[i][depth];
+                }
+
+                var indexSet = trie.SearchWord(str);
+
+                foreach (var index in indexSet)
+                {
+                    oneResult.Add(words[index]);
+                    DFS(words, depth + 1, trie, oneResult, result);
+                    oneResult.RemoveAt(oneResult.Count - 1);
+                }
+            }
+
+            private class Trie
+            {
+                public TrieNode root = new TrieNode();
+
+                public void AddWord(string word, int wordIndex)
+                {
+                    var cur = root;
+
+                    foreach (var c in word)
+                    {
+                        var curIndex = c - 'a';
+                        if (cur.TrieNodes[curIndex] == null)
+                        {
+                            cur.TrieNodes[curIndex] = new TrieNode();
+                        }
+
+                        cur.IndexSet.Add(wordIndex);
+
+                        cur = cur.TrieNodes[curIndex];
+                    }
+
+                    cur.IsEnd = true;
+                    cur.IndexSet.Add(wordIndex);
+                }
+
+                public HashSet<int> SearchWord(string word)
+                {
+                    var cur = root;
+
+                    foreach (var c in word)
+                    {
+                        var curIndex = c - 'a';
+
+                        if (cur.TrieNodes[curIndex] == null)
+                        {
+                            return new HashSet<int>();
+                        }
+
+                        cur = cur.TrieNodes[curIndex];
+                    }
+
+                    return cur.IndexSet;
+                }
+
+            }
+
+            private class TrieNode
+            {
+                public TrieNode[] TrieNodes = new TrieNode[26];
+                public bool IsEnd = false;
+                public HashSet<int> IndexSet = new HashSet<int>();
+            }
+        }
+    }
 }
