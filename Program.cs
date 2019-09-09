@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Leetcode.leetcode.contest.week142.p2;
+using LearnPT = Leetcode.learn.LearnPartial;
 
 
 namespace Leetcode
@@ -54,15 +54,12 @@ namespace Leetcode
             int? val = o as int?;
             Console.WriteLine(val.HasValue?val.Value.ToString():"null");
         }
-        static void Main(string[] args)
-        {
-            Solution s = new Solution();
-            /*
-             [[9,3,4],[9,1,7],[4,2,4],[7,4,5]]
-23
-             */
-            var rs = s.CarPooling(new[] {new[] {9,3,4}, new[] {9,1,7},new []{4,2,4},new []{7,4,5}}, 23);
-            Console.WriteLine($"{rs}");
+        static void Main(string[] args){
+
+//            jzoffer.Chapter3.p4.Solution.Test();
+
+
+            leetcode.trie.p6.Solution.Test();
         }
     }
 }
