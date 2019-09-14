@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Leetcode.leetcode.recursion
+namespace Leetcode.leetcode.recursion.recursionV1
 {
     namespace p1
     {

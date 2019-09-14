@@ -59,6 +59,7 @@ namespace Leetcode
 //            Console.WriteLine($"{int.MaxValue}");
 //            Console.WriteLine($"{int.MinValue}");
             leetcode.mock.p20190913.p2.Solution.Test();
+
         }
     }
 }
