@@ -55,10 +55,10 @@ namespace Leetcode
             Console.WriteLine(val.HasValue?val.Value.ToString():"null");
         }
         static void Main(string[] args){
-
-//            jzoffer.Chapter3.p4.Solution.Test();
-
-            leetcode.trie.p7.Solution.Test();
+//            leetcode.triva.P237.p6.Solution.Test();
+//            Console.WriteLine($"{int.MaxValue}");
+//            Console.WriteLine($"{int.MinValue}");
+            leetcode.mock.p20190913.p2.Solution.Test();
         }
     }
 }

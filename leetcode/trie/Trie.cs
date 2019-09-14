@@ -661,6 +661,107 @@ namespace Leetcode.leetcode.trie
 
                 return max;
             }
+            //1. bad character -> remove
+            //2. bracket -> remove inside is they are not the begin and the end otherwise just remove the bracket
+            //3. not harmful char -> remove
+            public static void TestProcessAuthor()
+            {
+                //"Nordin, Dani" "Munge(박상희)" "Mitchell, Phil"
+                var testCases = new[] { 
+//                    "KBS 수요기획팀",
+//                    "KDE, SIQUISTONE",
+//                    "MDM",
+//                    "Milecan Christophe",
+//                    "Mitchell, Phil",
+//                    "Munge(박상희)",
+//                    "Nordin, Dani",
+//                    "Théo le Début D'une Nouvelle Vie",
+//                    "(, JVDL)",
+//                    "(.1. F. P.)",
+//                    "(.M.لمسة أمل.M.)",
+//                    "(0234) 3333111",
+//                    "(1.31.5)",
+//                    "(100)²",
+//                    "(ADM2)Alfredoolsr",
+//                    "(AFP/Abenblatt.De)",
+//                    "(ALMANACH).",
+//                    "(Ayane∗•Ω•∗)",
+//                    "(Azda)/Www.Wspolczesna.Pl",
+                    "(美国)大卫"
+                };
+                var author = "Nordin, Dani";
+                foreach (var testCase in testCases)
+                {
+                    Console.WriteLine($"{ProcessAuthor(testCase)}");
+                }
+                
+            }
+            public static string ProcessAuthor(string author)
+            {
+                author = PolishAuthor(author.ToLower());
+                if (BadAuthor(author)) return string.Empty;
+                return author;
+            }
+            public static List<string> badStringList = new List<string>{"com","www","0","1","2","3","4","5","6","7","8","9","!","@","#","~",";"};
+            public static bool BadAuthor(string author)
+            {
+                if (string.IsNullOrEmpty(author)) return true;
+                foreach (var badString in badStringList)
+                {
+                    if (author.Contains(badString)) return true;
+                }
+                return false;
+            }
+
+
+
+            public static string RemoveInnerBracket(string author)
+            {
+                var left = new char[] {'(', '[', '{'};
+                var right = new char[] {')', ']', '}'};
+                var len = left.Length;
+                for (var i = 0; i < len; i++)
+                {
+                    var lb = author.IndexOf(left[i]);
+                    var rb = author.IndexOf(right[i]);
+                    if (lb > -1 && lb < rb )
+                    {
+                        author = author.Substring(0, lb) + author.Substring(rb + 1, author.Length - (rb + 1));
+                    }
+                }
+
+                return author;
+            }
+            public static string PolishAuthor(string author)
+            {
+                author = RemoveInnerBracket(author);//[US] Jack London
+                
+                foreach (var ch in separatorChar)
+                {
+                    author = author.Replace(ch, ' ');
+                }
+                author = author.Trim(trimedChar.ToArray());
+                author = author.Replace("  ", " ");
+                return author;
+            }
+            public static List<char> separatorChar = new List<char>{':','.',',','\\','/','`'};//query contains author or author contains query
+            public static List<char> trimedChar = new List<char>{'\"','\'','(',')','[',']','{','}','*','.',',',' '};
+//            public static List<char> uselessChar =
+//                new List<char>{'\"','\'','(',')','[',']','{','}','*'};//0-9
+            public static bool IsLeft(char ch)
+            {
+                return ch == '(' || ch == '[' || ch == '{';
+            }
+            
+            public static bool IsRight(char ch)
+            {
+                return ch == ')' || ch == '[' || ch == ']';
+            }
+            public static bool Contains(string author,string query)
+            {
+                if (string.IsNullOrEmpty(author) || string.IsNullOrEmpty(query)) return false;
+                return query.ToLower().Contains(author.ToLower());
+            }
         }
     }
 
