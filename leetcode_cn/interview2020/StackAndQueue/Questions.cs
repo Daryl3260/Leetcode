@@ -231,7 +231,127 @@ namespace Leetcode.leetcode_cn.interview2020.StackAndQueue
         {
             public IList<IList<string>> GroupAnagrams(string[] strs)
             {
-                return null;
+                if (strs == null || strs.Length == 0) return new List<IList<string>>();
+
+                var dictDict = new Dictionary<string, int[]>();
+                foreach (var str in strs)
+                {
+                    dictDict[str] = ConstructDict(str);
+                }
+
+                var rs = new List<IList<string>>();
+
+                foreach (var str in strs)
+                {
+                    if (rs.Any())
+                    {
+                        var found = false;
+                        foreach (var list in rs)
+                        {
+                            if (list[0].Length != str.Length)
+                            {
+                                continue;
+                            }
+
+                            var dict = dictDict[list[0]];
+                            var candidateDict = dictDict[str];
+
+                            if (IsAnagram(dict, candidateDict))
+                            {
+                                list.Add(str);
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found)
+                        {
+                            rs.Add(new List<string> { str });
+                        }
+                    }
+                    else
+                    {
+                        rs.Add(new List<string> { str });
+                    }
+                }
+
+                return rs;
+            }
+
+            public bool IsAnagram(int[] dictA, int[] dictB)
+            {
+                for (var i = 0; i < dictA.Length; i++)
+                {
+                    if (dictA[i] != dictB[i])
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            public int[] ConstructDict(string str)
+            {
+                var rs = new int[26];
+                foreach (var ch in str)
+                {
+                    rs[ch - 'a']++;
+                }
+
+                return rs;
+            }
+        }
+    }
+
+    namespace p2.v2
+    {
+        public class Solution
+        {
+            public IList<IList<string>> GroupAnagrams(string[] strs)
+            {
+                var dict = new Dictionary<string, string>();
+                foreach (var str in strs)
+                {
+                    dict[str] = SortedString(str);
+                }
+
+                var rs = new List<IList<string>>();
+                var keyDict = new Dictionary<string, List<string>>();
+
+                foreach (var str in strs)
+                {
+                    if (rs.Any())
+                    {
+                        var key = dict[str];
+                        if (keyDict.TryGetValue(key, out var list))
+                        {
+                            list.Add(str);
+                        }
+                        else
+                        {
+                            var newList = new List<string> { str };
+                            keyDict[key] = newList;
+                            rs.Add(newList);
+                        }
+                    }
+                    else
+                    {
+                        var list = new List<string> { str };
+                        var key = dict[str];
+                        keyDict[key] = list;
+                        rs.Add(list);
+                    }
+                }
+
+                return rs;
+            }
+
+            public string SortedString(string str)
+            {
+                var arr = str.ToCharArray();
+                Array.Sort(arr);
+                var builder = new StringBuilder();
+                builder.Append(arr);
+                return builder.ToString();
             }
         }
     }
