@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Leetcode.leetcode_cn.tree
@@ -69,19 +70,6 @@ namespace Leetcode.leetcode_cn.tree
 
     namespace p2
     {
-        /**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     public int val;
- *     public TreeNode left;
- *     public TreeNode right;
- *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
         public class Solution
         {
             public int MaxPathSum(TreeNode root)
@@ -122,6 +110,70 @@ namespace Leetcode.leetcode_cn.tree
                     single = root.val;
                     return root.val;
                 }
+            }
+        }
+    }
+
+    namespace p3
+    {
+        public class Solution
+        {
+            public IList<int> RightSideView(TreeNode root)
+            {
+                if (root == null) return new List<int>();
+
+                var queue = new Queue<Tuple<TreeNode, int>>();
+                var rs = new List<int>();
+                var currentLevel = 0;
+                var currentRight = root;
+                queue.Enqueue(new Tuple<TreeNode, int>(root, currentLevel));
+
+                while (queue.Any())
+                {
+                    var first = queue.Dequeue();
+                    var parent = first.Item1;
+                    var level = first.Item2;
+                    if (currentLevel < level)
+                    {
+                        rs.Add(currentRight.val);
+                        currentLevel = level;
+                        currentRight = parent;
+                    }
+
+                    if (parent.right != null)
+                    {
+                        queue.Enqueue(new Tuple<TreeNode, int>(parent.right, level + 1));
+                    }
+
+                    if (parent.left != null)
+                    {
+                        queue.Enqueue(new Tuple<TreeNode, int>(parent.left, level + 1));
+                    }
+                }
+
+                rs.Add(currentRight.val);
+
+                return rs;
+            }
+        }
+    }
+
+    namespace p4
+    {
+        /**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+        public class Solution
+        {
+            public TreeNode LowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q)
+            {
+                return null;
             }
         }
     }
