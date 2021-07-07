@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System;
+using System.Collections.Generic;
+using System.Timers;
 
 namespace Leetcode.leetcode_cn.tree
 {
@@ -174,6 +176,74 @@ namespace Leetcode.leetcode_cn.tree
             public TreeNode LowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q)
             {
                 return null;
+            }
+        }
+    }
+
+    namespace p5
+    {
+        public class Solution
+        {
+            // minus one at final return
+            public int DiameterOfBinaryTree(TreeNode root)
+            {
+                if (root == null || (root.left == null && root.right == null)) return 0;
+                SubDia(root, out var sl, out var sd);
+                return sd - 1;
+            }
+
+            public void SubDia(TreeNode root, out int singleLeg, out int diameter)
+            {
+                if (root == null)
+                {
+                    singleLeg = 0;
+                    diameter = 0;
+                }
+                else
+                {
+                    SubDia(root.left, out int ls, out int ld);
+                    SubDia(root.right, out int rs, out int rd);
+                    singleLeg = Math.Max(ls, rs) + 1;
+                    var maxSubDia = Math.Max(ld, rd);
+                    diameter = Math.Max(maxSubDia, ls + rs + 1);
+                }
+            }
+        }
+    }
+
+    namespace p6
+    {
+        public class Solution
+        {
+            public bool IsSubtree(TreeNode root, TreeNode subRoot)
+            {
+                if (IsSameTree(root, subRoot)) return true;
+                if (root.left != null && IsSubtree(root.left, subRoot))
+                {
+                    return true;
+                }
+                if (root.right != null && IsSubtree(root.right, subRoot))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            // subroo
+            public bool IsSameTree(TreeNode root, TreeNode subRoot)
+            {
+                if (root == null)
+                {
+                    return subRoot == null;
+                }
+
+                if (subRoot == null || root.val != subRoot.val)
+                {
+                    return false;
+                }
+
+                return IsSameTree(root.left, subRoot.left) && IsSameTree(root.right, subRoot.right);
             }
         }
     }
