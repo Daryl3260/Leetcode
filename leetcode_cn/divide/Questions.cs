@@ -207,4 +207,337 @@ namespace Leetcode.leetcode_cn.divide
             }
         }
     }
+
+    namespace p2
+    {
+        public class Solution
+        {
+            public class PriorityQueue<T>//Max Heap
+            {
+                List<T> arr;
+                //IComparer<T> comparer;
+                public delegate int CompareDelegate(T a, T b);
+                CompareDelegate compare;
+                public PriorityQueue(CompareDelegate compare)
+                {
+                    arr = new List<T>();
+                    this.compare += compare;
+                }
+
+                public void Clear()
+                {
+                    arr.Clear();
+                }
+                //public PriorityQueue(IComparer<T> comparer)
+                //{
+                //    this.comparer = comparer;
+                //    arr = new List<T>();
+                //}
+                public void Add(T val)
+                {
+                    arr.Add(val);
+                    MoveUp(arr.Count - 1);
+                }
+                public T Pop()
+                {
+                    T rs = arr[0];
+                    T tmp = arr[0];
+                    arr[0] = arr[arr.Count - 1];
+                    arr[arr.Count - 1] = tmp;
+                    arr.RemoveAt(arr.Count - 1);
+                    if (arr.Count > 0)
+                    {
+                        MoveDown(0);
+                    }
+                    return rs;
+                }
+                public bool IsEmpty()
+                {
+                    return arr.Count > 0;
+                }
+                public int Count()
+                {
+                    return arr.Count;
+                }
+                public T Peek()
+                {
+                    return arr[0];
+                }
+                private void MoveDown(int idx)
+                {
+                    int len = arr.Count;
+                    int lc = LC(idx);
+                    int rc = RC(idx);
+                    if (lc >= len)
+                    {
+                        return;
+                    }
+                    else if (rc >= len)
+                    {
+                        if (compare(arr[idx], arr[lc]) < 0)
+                        {
+                            T tmp = arr[idx];
+                            arr[idx] = arr[lc];
+                            arr[lc] = tmp;
+                            MoveDown(lc);
+                        }
+                    }
+                    else
+                    {
+                        int maxChild = compare(arr[lc], arr[rc]) < 0 ? rc : lc;
+                        if (compare(arr[idx], arr[maxChild]) < 0)
+                        {
+                            T tmp = arr[idx];
+                            arr[idx] = arr[maxChild];
+                            arr[maxChild] = tmp;
+                            MoveDown(maxChild);
+                        }
+                    }
+                }
+                private void MoveUp(int idx)
+                {
+                    if (idx == 0) return;
+                    else
+                    {
+                        int parent = Parent(idx);
+                        if (compare(arr[parent], arr[idx]) < 0)
+                        {
+                            T tmp = arr[parent];
+                            arr[parent] = arr[idx];
+                            arr[idx] = tmp;
+                            MoveUp(parent);
+                        }
+
+                    }
+                }
+                private int LC(int idx)
+                {
+                    return idx * 2 + 1;
+                }
+                private int RC(int idx)
+                {
+                    return idx * 2 + 2;
+                }
+                private int Parent(int idx)
+                {
+                    return (idx - 1) / 2;
+                }
+
+            }
+
+            public int FindKthLargest(int[] nums, int k)
+            {
+                var pq = new PriorityQueue<int>((a, b) => (a - b));
+
+                foreach (var num in nums)
+                {
+                    pq.Add(num);
+                }
+
+                var rs = -1;
+                while (k > 0)
+                {
+                    k--;
+                    rs = pq.Pop();
+                }
+                return rs;
+            }
+        }
+    }
+
+    namespace p3
+    {
+        public class Solution
+        {
+            public bool SearchMatrix(int[][] matrix, int target)
+            {
+                if (matrix == null || matrix.Length == 0 || matrix[0].Length == 0) return false;
+
+                var rows = matrix.Length;
+                var cols = matrix[0].Length;
+
+                var i = 0;
+                var j = cols - 1;
+
+                while (i < rows && j > -1)
+                {
+                    var value = matrix[i][j];
+                    if (value == target)
+                    {
+                        return true;
+                    }
+                    else if (value < target)
+                    {
+                        i++;
+                    }
+                    else
+                    {
+                        j--;
+                    }
+                }
+
+                return false;
+            }
+        }
+    }
+
+    namespace p4
+    {
+        public class Solution
+        {
+            public class PriorityQueue<T>//Max Heap
+            {
+                List<T> arr;
+                //IComparer<T> comparer;
+                public delegate int CompareDelegate(T a, T b);
+                CompareDelegate compare;
+                public PriorityQueue(CompareDelegate compare)
+                {
+                    arr = new List<T>();
+                    this.compare += compare;
+                }
+
+                public void Clear()
+                {
+                    arr.Clear();
+                }
+                //public PriorityQueue(IComparer<T> comparer)
+                //{
+                //    this.comparer = comparer;
+                //    arr = new List<T>();
+                //}
+                public void Add(T val)
+                {
+                    arr.Add(val);
+                    MoveUp(arr.Count - 1);
+                }
+                public T Pop()
+                {
+                    T rs = arr[0];
+                    T tmp = arr[0];
+                    arr[0] = arr[arr.Count - 1];
+                    arr[arr.Count - 1] = tmp;
+                    arr.RemoveAt(arr.Count - 1);
+                    if (arr.Count > 0)
+                    {
+                        MoveDown(0);
+                    }
+                    return rs;
+                }
+                public bool IsEmpty()
+                {
+                    return arr.Count > 0;
+                }
+                public int Count()
+                {
+                    return arr.Count;
+                }
+                public T Peek()
+                {
+                    return arr[0];
+                }
+                private void MoveDown(int idx)
+                {
+                    int len = arr.Count;
+                    int lc = LC(idx);
+                    int rc = RC(idx);
+                    if (lc >= len)
+                    {
+                        return;
+                    }
+                    else if (rc >= len)
+                    {
+                        if (compare(arr[idx], arr[lc]) < 0)
+                        {
+                            T tmp = arr[idx];
+                            arr[idx] = arr[lc];
+                            arr[lc] = tmp;
+                            MoveDown(lc);
+                        }
+                    }
+                    else
+                    {
+                        int maxChild = compare(arr[lc], arr[rc]) < 0 ? rc : lc;
+                        if (compare(arr[idx], arr[maxChild]) < 0)
+                        {
+                            T tmp = arr[idx];
+                            arr[idx] = arr[maxChild];
+                            arr[maxChild] = tmp;
+                            MoveDown(maxChild);
+                        }
+                    }
+                }
+                private void MoveUp(int idx)
+                {
+                    if (idx == 0) return;
+                    else
+                    {
+                        int parent = Parent(idx);
+                        if (compare(arr[parent], arr[idx]) < 0)
+                        {
+                            T tmp = arr[parent];
+                            arr[parent] = arr[idx];
+                            arr[idx] = tmp;
+                            MoveUp(parent);
+                        }
+
+                    }
+                }
+                private int LC(int idx)
+                {
+                    return idx * 2 + 1;
+                }
+                private int RC(int idx)
+                {
+                    return idx * 2 + 2;
+                }
+                private int Parent(int idx)
+                {
+                    return (idx - 1) / 2;
+                }
+            }
+
+            public int[][] KClosest(int[][] points, int k)
+            {
+                var pq = new PriorityQueue<int[]>(
+                    (a, b) =>
+                    {
+                        return -(Length(a) - Length(b));
+                    }
+                );
+
+                foreach (int[] point in points)
+                {
+                    pq.Add(point);
+                }
+
+                int[] rs = null;
+
+                while (k > 0)
+                {
+                    k--;
+                    rs = pq.Pop();
+                }
+
+                var list = new List<int[]>();
+
+                var len = Length(rs);
+
+                foreach (var point in points)
+                {
+                    if (Length(point) <= len)
+                    {
+                        list.Add(point);
+                    }
+                }
+
+                return list.ToArray();
+            }
+
+            public static int Length(int[] point)
+            {
+                return point[0] * point[0] + point[1] * point[1];
+            }
+        }
+    }
 }
